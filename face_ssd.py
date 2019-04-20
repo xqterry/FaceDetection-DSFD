@@ -3,11 +3,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
-from layers import *
-from data import  widerface_640
+from .layers import *
+from .data import  widerface_640
 import os
 import pdb
-from model.detnet_backbone import *
+from .model.detnet_backbone import *
 import torchvision
 #import pretrainedmodels
 
