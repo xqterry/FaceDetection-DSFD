@@ -11,7 +11,7 @@ from .data import WIDERFace_ROOT , WIDERFace_CLASSES as labelmap
 from PIL import Image
 from .data import WIDERFaceDetection, WIDERFaceAnnotationTransform, WIDERFace_CLASSES, WIDERFace_ROOT, BaseTransform , TestBaseTransform
 from .data import *
-import torch.utils.data as data
+# import torch.utils.data as data
 from .face_ssd import build_ssd
 #from resnet50_ssd import build_sfd
 import pdb
@@ -36,7 +36,7 @@ plt.switch_backend('agg')
 # args = parser.parse_args()
 #
 # if args.cuda and torch.cuda.is_available():
-#     torch.set_default_tensor_type('torch.cuda.FloatTensor')
+# torch.set_default_tensor_type('torch.cuda.FloatTensor')
 # else:
 #     torch.set_default_tensor_type('torch.FloatTensor')
 # if not os.path.exists(args.save_folder):
@@ -66,7 +66,8 @@ def bbox_vote(det):
         det_accu[:, 0:4] = det_accu[:, 0:4] * np.tile(det_accu[:, -1:], (1, 4))
         max_score = np.max(det_accu[:, 4])
         det_accu_sum = np.zeros((1, 5))
-        det_accu_sum[:, 0:4] = np.sum(det_accu[:, 0:4], axis=0) / np.sum(det_accu[:, -1:])
+        # det_accu_sum[:, 0:4] = np.sum(det_accu[:, 0:4], axis=0) / np.sum(det_accu[:, -1:])
+        det_accu_sum[:, 0:4] = np.divide(np.sum(det_accu[:, 0:4], axis=0) , np.sum(det_accu[:, -1:]))
         det_accu_sum[:, 4] = max_score
         try:
             dets = np.row_stack((dets, det_accu_sum))
